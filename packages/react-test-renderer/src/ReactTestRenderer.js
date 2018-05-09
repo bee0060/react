@@ -411,6 +411,7 @@ const validWrapperTypes = new Set([
   FunctionalComponent,
   ClassComponent,
   HostComponent,
+  ForwardRef,
 ]);
 
 class ReactTestInstance {
@@ -475,6 +476,7 @@ class ReactTestInstance {
         case FunctionalComponent:
         case ClassComponent:
         case HostComponent:
+        case ForwardRef:
           children.push(wrapFiber(node));
           break;
         case HostText:
@@ -484,7 +486,6 @@ class ReactTestInstance {
         case ContextProvider:
         case ContextConsumer:
         case Mode:
-        case ForwardRef:
           descend = true;
           break;
         default:
@@ -736,6 +737,7 @@ const ReactTestRendererFiber = {
         }
         return TestRenderer.getPublicRootInstance(root);
       },
+      unstable_flushSync: TestRenderer.flushSync,
     };
 
     Object.defineProperty(
